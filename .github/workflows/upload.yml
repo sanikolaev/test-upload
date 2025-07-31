@@ -17,10 +17,15 @@ jobs:
           mkdir -p build/src/fuzzer/corpus
           echo 123 > build/src/fuzzer/corpus/file1
           echo 123 > build/src/fuzzer/corpus/file2
+          echo 123 > build/src/fuzzer/corpus/file3
           
-          cd build/src/fuzzer/
-          tar -czf corpus.tar.gz corpus
-          mkdir corpus-backup
-          mv corpus.tar.gz corpus-backup
-          cd corpus-backup
-          docker run --rm -v $(pwd):/upload manticoresearch/upload fuzzy-tests-corpus
+          if [ -d "build/src/fuzzer/corpus" ]; then
+            cd build/src/fuzzer/
+            tar -czf corpus.tar.gz corpus
+            mkdir -p corpus-backup
+            mv corpus.tar.gz corpus-backup
+            cd corpus-backup
+            docker run --rm -v "$(pwd)":/upload manticoresearch/upload fuzzy-tests-corpus
+          else
+            echo "Directory build/src/fuzzer/corpus not found. Skipping corpus upload."
+          fi
