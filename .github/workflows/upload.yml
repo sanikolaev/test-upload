@@ -25,7 +25,7 @@ jobs:
             mkdir -p corpus-backup
             mv corpus.tar.gz corpus-backup
             cd corpus-backup
-            docker run --rm -v "$(pwd)":/upload manticoresearch/upload fuzzy-tests-corpus
+            docker run --rm -v "$(pwd)":/upload manticoresearch/upload fuzz-tests-corpus
           else
             echo "Directory build/src/fuzzer/corpus not found. Skipping corpus upload."
           fi
