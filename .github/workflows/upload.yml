@@ -17,5 +17,5 @@ jobs:
           cd corpus
           echo 123 > file
           echo 234 > file2
-          docker run -it --rm -v $(pwd):/upload manticoresearch/upload fuzzy-tests-corpus
+          docker run --rm -v $(pwd):/upload manticoresearch/upload fuzzy-tests-corpus
 
