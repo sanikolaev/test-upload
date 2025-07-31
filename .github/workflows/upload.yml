@@ -11,11 +11,16 @@ jobs:
     name: test
     runs-on: ubuntu-22.04
     steps:
-      - name: test
+      - name: 📦 Upload fuzzer corpus backup to Manticore S3
+        if: always()
         run: |
-          mkdir corpus
-          cd corpus
-          echo 123 > file
-          echo 234 > file2
+          mkdir -p build/src/fuzzer
+          echo 123 > build/src/fuzzer/file1
+          echo 123 > build/src/fuzzer/file2
+          
+          cd build/src/fuzzer/
+          tar -czf corpus.tar.gz corpus
+          mkdir corpus-backup
+          mv corpus.tar.gz corpus-backup
+          cd corpus-backup
           docker run --rm -v $(pwd):/upload manticoresearch/upload fuzzy-tests-corpus
-
