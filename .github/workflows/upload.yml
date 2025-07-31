@@ -14,9 +14,9 @@ jobs:
       - name: 📦 Upload fuzzer corpus backup to Manticore S3
         if: always()
         run: |
-          mkdir -p build/src/fuzzer
-          echo 123 > build/src/fuzzer/file1
-          echo 123 > build/src/fuzzer/file2
+          mkdir -p build/src/fuzzer/corpus
+          echo 123 > build/src/fuzzer/corpus/file1
+          echo 123 > build/src/fuzzer/corpus/file2
           
           cd build/src/fuzzer/
           tar -czf corpus.tar.gz corpus
