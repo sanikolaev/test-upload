@@ -1,0 +1,20 @@
+name: test
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+
+  test:
+    name: test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: test
+        run: |
+          mkdir corpus
+          cd corpus
+          echo 123 > file
+          echo 234 > file2
+          docker run -it --rm -v $(pwd):/upload manticoresearch/upload fuzzy-tests-corpus
